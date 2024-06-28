@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class StudentController {
@@ -64,8 +65,9 @@ public class StudentController {
 
     //handler method to handle delete student request
     @GetMapping("/students/{id}")
-    public String deleteStudent(@PathVariable Long id){
+    public String deleteStudent(@PathVariable Long id, RedirectAttributes redirectAttributes){
         studentService.deleteStudentById(id);
+        redirectAttributes.addFlashAttribute("successMessage", "The student has been successfully deleted!" );
         return "redirect:/students";
     }
 }
